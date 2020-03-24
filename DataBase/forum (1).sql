@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 23 Mar 2020, 09:43
+-- Czas generowania: 24 Mar 2020, 21:31
 -- Wersja serwera: 10.4.11-MariaDB
 -- Wersja PHP: 7.2.27
 
@@ -59,7 +59,7 @@ CREATE TABLE `uzytkownicy` (
   `Id_uzytkownik` int(10) NOT NULL,
   `imie_i_nazwisko` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `haslo` varchar(50) NOT NULL,
+  `haslo` char(50) NOT NULL,
   `data_urodzenia` date NOT NULL,
   `plec` varchar(20) NOT NULL,
   `wojewodztwo` varchar(50) NOT NULL,
@@ -107,7 +107,7 @@ ALTER TABLE `komentarz`
 -- AUTO_INCREMENT dla tabeli `uzytkownicy`
 --
 ALTER TABLE `uzytkownicy`
-  MODIFY `Id_uzytkownik` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_uzytkownik` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Ograniczenia dla zrzutów tabel
