@@ -118,6 +118,10 @@ form input[type="submit"]{
 #maincontentindex{
 	width: 100%;
 }
+#indexcalaadmin admin{
+	display: table;
+}
+
 a{
 	text-decoration: none;
 	color: rgba(238, 114, 114, 1);
