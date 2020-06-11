@@ -18,9 +18,14 @@
 				</div>
 				<nav>
 					<ul>
-						<li class="home"><a href="index.php"><span>Start</span></a></li>
+					<li class="home"><a href="index.php"><span>Start</span></a></li>
 						<li class="html5"><a href="wpisy.php"><span>Wpisy</span></a></li>
 						<li class="omnie"><a href="omnie.php"><span>O mnie</span></a></li>
+						<?php
+							if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'])
+							echo '<li class= "rejestracja"><a href="admin2.php"><span>Użytkownicy</span></a></li>
+							<li class= "rejestracja"><a href="admin.php"><span>Artykuły</span></a></li>'
+						?>
 						<?php
 						if(isset($_SESSION['logged']) && $_SESSION['logged'] == true)
 						echo "<li class= 'rejestracja'><a href='wyloguj.php'><span>Wyloguj</span></a></li>";
@@ -29,6 +34,10 @@
 						<li class= "rejestracja"><a href="zarejestruj.php"><span>Zarejestruj</span></a></li>'
 
 						?>
+						<?php
+						if(isset($_SESSION['logged']) && $_SESSION['logged'] == true)
+						echo "<li class= 'rejestracja'><a href='zmienHaslo.php'><span>Zmień hasło</span></a></li>";
+						?>
 
 					</ul>
 				</nav>
@@ -36,20 +45,18 @@
 
 			</header>
 				<div class="content">
-					<form action="zalogujbac.php" method="post" >
+					<form action="nowehaslo.php" method="post" >
 							<div class="row">
-								<label>Email</label>
-								<input type="email" name = "email" id="email" required>
+								<label>Wpisz stare haslo:</label>
+								<input type="password" name = "password1" id="email" required>
 							</div>
 							<div class="row">
-								<label for="password">Hasło</label>
-								<input type="password" name = "password" id="password" required>
+								<label>Wpisz nowe haslo:</label>
+								<input type="password" name = "password2" id="password" required>
 							</div>
 								<div class="row">
 								<input type="submit" value="Zaloguj">
-								<?php
-									if(isset($_SESSION['blad'])) echo $_SESSION['blad'];	
-								?>
+								
 								</div>
 
 					</form>

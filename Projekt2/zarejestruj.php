@@ -95,7 +95,7 @@
 								<input id="name" name = "name" type="text" required>
 							</div>
 							<div class="row">
-								<label for="Email">Email</label>
+								<label>Email</label>
 								<input type="email" name = "email" id="email" required>
 								<?php
 								if(isset($_SESSION['e_email'])){
@@ -142,11 +142,11 @@
 							</div>
 								<div class="row">
 									<label for="kodpocztowy">Kod pocztowy</label>
-									<input type="text" name = "kod" id="kodpocztowy" pattern="\d{2}-\d{3}$"  placeholder="XX-XXX">
+									<input type="text" name = "kod" id="kodpocztowy" pattern="\d{2}-\d{3}$" placeholder="XX-XXX">
 								</div>
 								<div class="row">
 									<label for="description">O mnie</label>
-									<textarea id="description" name = "omnie" maxlength="150" placeholder="max 150 słów" rows="3"></textarea> 
+									<textarea id="description" name = "omnie" maxlength="150" placeholder="max 150 słów" rows="3"> </textarea>
 								</div>
 								<div class="row">
 									<input type="checkbox" id="rules" required>
@@ -163,7 +163,6 @@
 			<footer>
 				Wszelkie prawa zastrzeżone
 			</footer>
-	
 
 
 </body>

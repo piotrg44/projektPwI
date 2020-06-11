@@ -34,6 +34,10 @@
 						<li class= "rejestracja"><a href="zarejestruj.php"><span>Zarejestruj</span></a></li>'
 
 						?>
+						<?php
+						if(isset($_SESSION['logged']) && $_SESSION['logged'] == true)
+						echo "<li class= 'rejestracja'><a href='zmienHaslo.php'><span>Zmień hasło</span></a></li>";
+						?>
 					</ul>
 				</nav>
 

@@ -5,7 +5,7 @@
 <html lang="pl-PL">
 <head>
 	<meta charset="utf-8">
-
+	
 	<title>Blog</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 
@@ -33,6 +33,10 @@
 						echo '<li class= "zaloguj"><a href="zaloguj.php"><span>Zaloguj</span></a></li>
 						<li class= "rejestracja"><a href="zarejestruj.php"><span>Zarejestruj</span></a></li>'
 
+						?>
+						<?php
+						if(isset($_SESSION['logged']) && $_SESSION['logged'] == true)
+						echo "<li class= 'rejestracja'><a href='zmienHaslo.php'><span>Zmień hasło</span></a></li>";
 						?>
 					</ul>
 				</nav>

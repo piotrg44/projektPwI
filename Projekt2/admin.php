@@ -64,7 +64,6 @@
 <html lang="pl-PL">
 <head>
 	<meta charset="utf-8">
-	
 	<title>Blog</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 
@@ -91,7 +90,10 @@
 						else
 						echo '<li class= "zaloguj"><a href="zaloguj.php"><span>Zaloguj</span></a></li>
 						<li class= "rejestracja"><a href="zarejestruj.php"><span>Zarejestruj</span></a></li>'
-
+						?>
+						<?php
+						if(isset($_SESSION['logged']) && $_SESSION['logged'] == true)
+						echo "<li class= 'rejestracja'><a href='zmienHaslo.php'><span>Zmień hasło</span></a></li>";
 						?>
 					</ul>
 				</nav>
@@ -104,18 +106,18 @@
 							<b>Dodawanie postu:</b>
 								<div >	
 									<label>Podaj id postu: </label>
-									<input type="text" id="header3" name = "id_postu" >
+									<input type="text" id="header1" name = "id_postu" >
 								</div>
 								<div >
 									<label>Podaj nagłówek: </label>
-									<input type="text" id="header4" name = "tytul" >
+									<input type="text" id="header2" name = "tytul" > 
 								</div>
 								<div >
 									<label for="description">Napisz post:</label>
 									<textarea id="description" name = "tresc" maxlength="1000" placeholder="max 1000 słów" rows="15"></textarea> 
 								</div>
 								<div>
-								<input type="submit">
+								<input type="submit" value="Dodaj">
 								</div>
 								
 
@@ -126,59 +128,57 @@
 			<div class="content">
 			<div class="mainContentIndex">
 			
-				<form method="post" autocomplete="off">
-				<b>Spis postów: </b><br>
-				<?php
-					$config = require_once 'config.php';
-
-					$db = new PDO
-					( 
-						"mysql:host={$config ['host']};
-						dbname={$config ['database']};
-						charset=utf8",
-						$config ['user'],
-						$config['password']
-					);
-
-					$sql = 'SELECT * FROM post';
-
-					foreach ($db -> query($sql) as $rows) {
-
-					echo "<b>".$rows['Id_post']." ".$rows['tytul']."</b>"."<br>";
-					}
-					?>
-</form>
 					<br>
 					<br>
+					<div>
+					<form action="Usunpost.php" method="get">
+					<b>Usuwanie postu:</b><br>
+						<select id="ids1" name="ids1">
+							<?php
+							$config = require_once 'config.php';
 
+							$db = new PDO
+							( 
+								"mysql:host={$config ['host']};
+								dbname={$config ['database']};
+								charset=utf8",
+								$config ['user'],
+								$config['password']
+							);
+							$sql = "SELECT * FROM post";
+							foreach ($db->query($sql) as $row) {
+								echo "<option value=".$row['Id_post'].">".$row['tytul']."</option>";
+							}
+							?>
+						</select>
+						<div>
+						<input type="submit" value="USUŃ">
+						</div>
+             		</form>
+					 
+					 </div>
 
-<form method="post" autocomplete="off">
-							<b>Usuwanie postu:</b>
-								<div >	
-									<label>Podaj id postu który chcesz usunac: </label>
-									<input type="text" id="header1" name = "id_postuDoUsuniecia" >
-								</div>
-								<div>
-								<input type="submit" value="Usuń">
-								</div>
-								</form>
-								<form method="post" autocomplete="off">
-								<b>Usuwanie komentarza:</b>
-								<div >	
-									<label>Podaj id komentarza który chcesz usunac: </label>
-									<input type="text" id="header2" name = "id_komentarzaDoUsuniecia" >
-								</div>
-								<div>
-								<input type="submit" value="Usuń">
-								</div>
-								</form>
+					 <form action="Usunkom.php" method="get">
+					<b>Usuwanie komentarza:</b><br>
+						<select id="ids2" name="ids2">
+							<?php
 							
+							$sql = "SELECT * FROM komentarz";
+							foreach ($db->query($sql) as $row) {
+								echo "<option value=".$row['Id_komentarz'].">".$row['tresc']."</option>";
+							}
+							?>
+						</select>
+						<div>
+						<input type="submit" value="USUŃ">
+						</div>
+             		</form>
+				</div>
 							
 					
 					
 				</div>
 			</div>
-</div>
 			<footer>
 				Wszelkie prawa zastrzeżone 
 			</footer>
@@ -186,4 +186,4 @@
 
 
 </body>
-</html>			
+</html>

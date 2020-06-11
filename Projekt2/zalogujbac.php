@@ -12,6 +12,7 @@
         $email = $_POST['email'];
         $password = $_POST['password'];
 
+
         if($result = @$connection->query(sprintf("SELECT * FROM uzytkownicy where email='$email'",mysqli_real_escape_string($connection, $email)))){
 
             $howMuchUsers = $result->num_rows;
@@ -24,6 +25,7 @@
                     $_SESSION['logged'] = true;
 
                     $_SESSION['Id_uzytkownik'] = $row['Id_uzytkownik'];
+                    $_SESSION['haslo'] = $row['haslo'];
                     $_SESSION['imie_i_nazwisko'] = $row['imie_i_nazwisko'];
                     $_SESSION['email'] = $row['email'];
                     $_SESSION['data_urodzenia'] = $row['data_urodzenia'];
@@ -38,7 +40,7 @@
                     header("location: index.php");
                 }
 
-                if($email == "11piot@wp.pl" && $password == "zaq1@WSX"){
+                if($email == "11piot@wp.pl"){
                     $_SESSION['isAdmin'] = true;
                 }
 

@@ -38,6 +38,10 @@
 						<li class= "rejestracja"><a href="zarejestruj.php"><span>Zarejestruj</span></a></li>'
 
 						?>
+						<?php
+						if(isset($_SESSION['logged']) && $_SESSION['logged'] == true)
+						echo "<li class= 'rejestracja'><a href='zmienHaslo.php'><span>Zmień hasło</span></a></li>";
+						?>
 					</ul>
 				</nav>
 
@@ -46,37 +50,31 @@
 			<div class="content">
 				<div class="mainContentindex">
 					
-				<form action="usunUzytkownika.php" method="post">
+				<form action="UsunUzytkownika.php" method="get">
+					<b>Usuwanie uzytkownika:</b><br>
+						<select id="ids3" name="ids3">
 
-				
-				<b>Spis uzytkownikow:</b><br>
-				<?php
-					$config = require_once 'config.php';
-
-					$db = new PDO
-					( 
-						"mysql:host={$config ['host']};
-						dbname={$config ['database']};
-						charset=utf8",
-						$config ['user'],
-						$config['password']
-					);
-
-					$sql = 'SELECT * FROM uzytkownicy';
-
-					foreach ($db -> query($sql) as $rows) {
-
-					echo "<b>".$rows['Id_uzytkownik']." ".$rows['imie_i_nazwisko']."</b>"."<br>";
-					}
-					?>
-				<div>
-				<label>Podaj id uzytkownika do usuniecia: </label>
-				<input type="text" name = "Id_uzytkownik">
-				</div>
-				<div>
-				<input type="submit" value = "Usuń">
-				</div>
-				</form>
+							<?php
+							$config = require_once 'config.php';
+							$db = new PDO
+							( 
+								"mysql:host={$config ['host']};
+								dbname={$config ['database']};
+								charset=utf8",
+								$config ['user'],
+								$config['password']
+							);
+							
+							$sql = "SELECT * FROM uzytkownicy";
+							foreach ($db->query($sql) as $row) {
+								echo "<option value=".$row['Id_uzytkownik'].">".$row['imie_i_nazwisko']."</option>";
+							}
+							?>
+						</select>
+						<div>
+						<input type="submit" value="USUŃ">
+						</div>
+             		</form>
 				</div>
 					
 			
